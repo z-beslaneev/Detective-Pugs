@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru" >
+  <head>
+    <meta charset="UTF-8">
+    <title>Dog Story</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/js.cookie.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <style>
+      html, body {
+      display: flex;
+      justify-content: center;
+      height: 100%;
+      }
+      body, div, h1, form, input, p, select { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 16px;
+      color: #666;
+      }
+      h1 {
+      padding: 10px 0;
+      font-size: 32px;
+      font-weight: 300;
+      text-align: center;
+      }
+      p {
+      font-size: 12px;
+      }
+      hr {
+      color: #a9a9a9;
+      opacity: 0.3;
+      }
+      .main-block {
+      max-width: 340px; 
+      min-height: 460px; 
+      padding: 10px 0;
+      margin: auto;
+      border-radius: 5px; 
+      border: solid 1px #ccc;
+      box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+      background: #ebebeb; 
+      }
+      form {
+      margin: 0 30px;
+      }
+      .account-type, .gender {
+      margin: 15px 0;
+      }
+      input[type=radio] {
+      display: none;
+      }
+      label.icon {
+        margin: 0;
+        border-radius: 5px 0 0 5px;
+        height: 38px;
+        width: 45px;
+        box-sizing: border-box;
+      }
+      label.radio {
+      position: relative;
+      display: inline-block;
+      padding-top: 4px;
+      margin-right: 20px;
+      text-indent: 30px;
+      overflow: visible;
+      cursor: pointer;
+      }
+      label.radio:before {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #1c87c9;
+      }
+      label.radio:after {
+      content: "";
+      position: absolute;
+      width: 9px;
+      height: 4px;
+      top: 8px;
+      left: 4px;
+      border: 3px solid #fff;
+      border-top: none;
+      border-right: none;
+      transform: rotate(-45deg);
+      opacity: 0;
+      }
+      input[type=radio]:checked + label:after {
+      opacity: 1;
+      }
+      input[type=text], input[type=password], select {
+      width: calc(100% - 45px);
+      height: 36px;
+      box-sizing: border-box;
+      margin: 13px 0 0 -5px;
+      padding-left: 10px; 
+      border-radius: 0 5px 5px 0;
+      border: solid 1px #cbc9c9; 
+      box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+      background: #fff; 
+      }
+      input[type=password] {
+      margin-bottom: 15px;
+      }
+      .icon {
+      display: inline-block;
+      padding: 9.3px 15px;
+      box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+      background: #1c87c9;
+      color: #fff;
+      text-align: center;
+      }
+      .btn-block {
+      margin-top: 10px;
+      text-align: center;
+      }
+      button {
+      width: 100%;
+      padding: 10px 0;
+      margin: 10px auto;
+      border-radius: 5px; 
+      border: none;
+      background: #1c87c9; 
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      }
+      button:hover {
+      background: #26a9e0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-block">
+      <h1>Dog story</h1>
+      <form action="/" id="form_enter">
+        <label class="icon" for="inp_name"><i class="fas fa-user"></i></label>
+        <input id="inp_name" type="text" placeholder="Имя игрока" required>
+        <label class="icon" for="inp_map"><i class="fas fa-map-marked"></i></label>
+        <select id="inp_map"></select>
+        <hr />
+        <button id="enter" type="submit">Вход</button>
+      </form>
+    </div>
+    <script>
+        $.getJSON('/api/v1/maps').done(function(res) {
+            for(let map of res) {
+                var elem = $('<option>');
+                elem.text(map['name']);
+                elem.attr('value', map['id']);
+                $('#inp_map').append(elem);
+            }
+        }).fail(function(){
+            alert("Can't load map list");
+        });
+
+        $('#form_enter').on('submit', function(x) {
+            var user_name = $('#inp_name').val();
+            var submitted_map = $('#inp_map').val();
+            $.ajax({
+                type: "POST",
+                url: '/api/v1/game/join',
+                dataType: 'json',
+                    contentType:"application/json",
+                data: JSON.stringify({
+                    userName: user_name,
+                    mapId: submitted_map
+                })
+            }).done(function(x) {
+                Cookies.set('authToken', x['authToken']);
+                Cookies.set('playerId', x['playerId']);
+                Cookies.set('mapId', submitted_map);
+                location.href = "/game.html";
+            }).fail(function(x) {
+                if (x.status != 500) {  
+                    alert(x.responseJSON['message']);
+                }
+            })
+            return false;
+        });
+    </script>
+  </body>
+</html>

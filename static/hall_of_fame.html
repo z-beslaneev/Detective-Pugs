@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru" >
+  <head>
+    <meta charset="UTF-8">
+    <title>Dog Story</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/js.cookie.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <style>
+      html, body {
+      display: flex;
+      justify-content: center;
+      height: 100%;
+      }
+      body, div, h1, form, input, p, select { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 16px;
+      color: #666;
+      }
+      h1 {
+      padding: 10px 0;
+      font-size: 32px;
+      font-weight: 300;
+      text-align: center;
+      }
+      p {
+      font-size: 12px;
+      }
+      hr {
+      color: #a9a9a9;
+      opacity: 0.3;
+      }
+      .main-block {
+      padding: 2rem;
+      margin: auto;
+      border-radius: 5px; 
+      border: solid 1px #ccc;
+      box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+      background: #ebebeb; 
+      }
+
+      #new_game_link{
+        display: block;
+        text-align: center;
+        font-size: 150%;
+        margin: 2rem;
+      }
+      #loading{
+        font-style: italic;
+        display: block;
+        text-align: center;
+        font-size: 150%;
+        margin: 2rem;
+      }
+      .main-block.loaded #loading{
+        display:none;
+      }
+      .main-block.loaded #records{
+        display:table;
+      }
+      #records{border-collapse: collapse;display: none}
+      #records>thead>tr>th{
+        min-width: 8rem;
+      }
+      #records>tbody>tr>td{
+        text-align: center;
+        padding: 10px 3px;
+      }
+      #records>tbody>tr:nth-child(odd) {background: #E1E1E1}
+    </style>
+  </head>
+  <body>
+    <div class="main-block">
+      <h1>Dog story</h1>
+      <a id="new_game_link" href="/">Новая игра</a>
+      <div id="loading">Загрузка...</div>
+      <table id="records">
+        <thead>
+            <tr><th>Имя</th><th>Очки</th><th>Время в игре</th></tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <script>
+        $.getJSON('/api/v1/game/records').done(function(res) {
+            for(let line of res) {
+                var tr = $('<tr>');
+
+                var name = $('<td>');
+                var score = $('<td>');
+                var time = $('<td>');
+
+                name.text(line['name']);
+                score.text(line['score']);
+                time.text(line['playTime']);
+
+                tr.append([name, score, time]);
+                $('#records>tbody').append(tr);
+            }
+            $('.main-block').addClass('loaded');
+        }).fail(function(){
+            alert("Can't load map list");
+        });
+    </script>
+  </body>
+</html>

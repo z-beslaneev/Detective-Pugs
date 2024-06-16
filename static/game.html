@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <title>Dog Story</title>
+    <style>
+      body { margin: 0; }
+      div#score_table {
+        position: fixed;
+        display:flex;
+        flex-direction: column;
+      }
+    </style>
+    <script src="js/three.min.js"></script>
+    <script src="js/controls/OrbitControls.js"></script>
+    <script src="js/loaders/OBJLoader.js"></script>
+    <script src="js/loaders/MTLLoader.js"></script>
+    <script src="js/loaders/GLTFLoader.js"></script>
+    <script src="js/loaders/FBXLoader.js"></script>
+    <script src="js/libs/fflate.min.js"></script>
+    <script src="js/utils/SkeletonUtils.js"></script>
+
+    <script src="js/game.js"></script>
+    <script src="js/helper.js"></script>
+    <script src="js/game_map.js"></script>
+    <script src="js/js.cookie.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    
+  </head>
+  <body>
+    <div id="container">
+    </div>
+    <div id="score_table">
+    </div>
+  </body>
+  <script>
+    function loadMapList(cb) {
+      $.getJSON('/api/v1/maps', function(data){
+        cb(data);
+      });
+    }
+
+    function loadMap(cmap) {
+      $('#container').hide();
+      $.getJSON('/api/v1/maps/' + cmap, function(data){
+        gameLoadMap(data);
+        gameserverMain();
+      });
+    }
+
+    loadMap(Cookies.get('mapId'));
+  </script>
+</html>

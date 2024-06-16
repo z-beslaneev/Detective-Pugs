@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru" >
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <p>Эта страница создаёт нагрузку на сервер...</p>
+    <p>Частота запросов в секунду (от 1 до 100): <input value="10" id="rate"></p>
+
+
+    <script>
+      Array.prototype.random = function () {
+        return this[Math.floor((Math.random()*this.length))];
+      };
+
+      var counter = 0;
+      const minTime = 10;
+      const files = [
+        '/enter_game.html',
+        '/favicon-16x16.png',
+        '/favicon-32x32.png',
+        '/favicon.ico',
+        '/file with spaces.html',
+        '/game.html',
+        '/api/v1/maps',
+        '/abracadabra'
+        ]
+
+      const act = function() {
+        var url = files.random();
+        if (Math.random() < 0.5) {
+           url += "?counter=" + counter;
+        }
+        $.get(url, function( data ){});
+        counter += 1;
+
+        const v = Number($('#rate').val());
+        const maxTime = (v >= 1 && v <= 100) ? Math.max(minTime, 1000 / v) : 100;
+        setTimeout(act, minTime + Math.random() * (maxTime - minTime))
+      }
+
+      act();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Game</title>
+    <style>
+      body { margin: 0; }
+    </style>
+    <script src="js/three.min.js"></script>
+    <script src="js/controls/OrbitControls.js"></script>
+    <script src="js/loaders/OBJLoader.js"></script>
+    <script src="js/loaders/MTLLoader.js"></script>
+    <script src="js/loaders/GLTFLoader.js"></script>
+    <script src="js/libs/fflate.min.js"></script>
+    <script src="js/loaders/FBXLoader.js"></script>
+
+    <script src="js/game.js"></script>
+    <script src="js/helper.js"></script>
+    <script src="js/game_map.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+      const map={
+              "id": "map1",
+              "name": "Map 1",
+              "roads": [
+                {
+                  "x0": 0,
+                  "y0": 0,
+                  "x1": 40
+                },
+                {
+                  "x0": 40,
+                  "y0": 0,
+                  "y1": 30
+                },
+                {
+                  "x0": 40,
+                  "y0": 30,
+                  "x1": 0
+                },
+                {
+                  "x0": 0,
+                  "y0": 0,
+                  "y1": 30
+                }
+              ],
+              "buildings": [
+                {
+                  "x": 5,
+                  "y": 5,
+                  "w": 30,
+                  "h": 20
+                }
+              ],
+              "offices": [
+                {
+                  "id": "wh0",
+                  "x": 40,
+                  "y": 30,
+                  "offsetX": 5,
+                  "offsetY": 0
+                }
+              ]
+            };
+
+    </script>
+    
+  </head>
+  <body>
+    <div id="container">
+      Choose map:
+    </div>
+  </body>
+  <script>
+    function loadMapList(cb) {
+      $.getJSON('/api/v1/maps', function(data){
+        cb(data);
+      });
+    }
+
+    function loadMap(cmap) {
+      $('#container').hide();
+      $.getJSON('/api/v1/maps/' + cmap['id'], function(data){
+        gameLoadMap(data);
+        gameserverMain();
+      });
+    }
+
+    loadMapList(maps => {
+      const ul = $('<ul>');
+      ul.addClass('map-list');
+      for(imap of maps) {
+        const cmap = imap;
+        const li = $('<li>');
+        const a = $('<a>');
+        a.text(cmap['name'])
+        a.attr('href', '#')
+        a.click(function(){
+          loadMap(cmap);
+        });
+        li.append(a);
+        ul.append(li);
+      }
+      $('#container').append(ul);
+    });
+  </script>
+</html>
