@@ -46,3 +46,6 @@ docker build -t my_http_server .
    ```
    127.0.0.1
    ```
+<p align="center">
+  <img src="https://github.com/z-beslaneev/Detective-Pugs/blob/main/assets/gameplay.gif"/>
+</p>
