@@ -10,6 +10,7 @@
 
 This project is a multiplayer game written in C++ and utilizes modern technologies for backend development. 
 
+The goal of the game is to collect as many things as possible and take them back to the base.
 
 ### Built With
 * ![](https://img.shields.io/badge/C%2B%2B20-%2320232A?style=for-the-badge&logo=cplusplus)
