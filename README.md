@@ -16,6 +16,7 @@ This project is a multiplayer game written in C++ and utilizes modern technologi
 * ![](https://img.shields.io/badge/cmake-%2320232A?style=for-the-badge&logo=cmake)
 * ![](https://img.shields.io/badge/conan-%2320232A?style=for-the-badge&logo=conan)
 * ![](https://img.shields.io/badge/docker-%2320232A?style=for-the-badge&logo=docker)
+* ![](https://img.shields.io/badge/postman-%2320232A?style=for-the-badge&logo=postman)
 * ![](https://img.shields.io/badge/postgresql-%2320232A?style=for-the-badge&logo=postgresql)
 
 ## Getting Started
@@ -49,3 +50,9 @@ docker build -t my_http_server .
 <p align="center">
   <img src="https://github.com/z-beslaneev/Detective-Pugs/blob/main/assets/gameplay.gif"/>
 </p>
+
+
+### API Documentation
+
+You can read the API documentation at the [link](https://documenter.getpostman.com/view/2539805/2sA3XTgMDq) or by importing the collection into postman
+
