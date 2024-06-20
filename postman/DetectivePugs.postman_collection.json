@@ -1,0 +1,448 @@
+{
+	"info": {
+		"_postman_id": "a4b4f302-b3f9-4fc7-a012-b69d2fa555c1",
+		"name": "DetectivePugs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2539805"
+	},
+	"item": [
+		{
+			"name": "Get all maps",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1/api/v1/maps",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"api",
+						"v1",
+						"maps"
+					]
+				},
+				"description": "Returns a list of all available maps on the server"
+			},
+			"response": [
+				{
+					"name": "maps",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/maps",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"maps"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "185"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"map1\",\n        \"name\": \"Map 1\"\n    },\n    {\n        \"id\": \"town\",\n        \"name\": \"Town\"\n    },\n    {\n        \"id\": \"map3\",\n        \"name\": \"Map 3\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get certain map",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1/api/v1/maps/map1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"api",
+						"v1",
+						"maps",
+						"map1"
+					]
+				},
+				"description": "Returns information about a specific map"
+			},
+			"response": [
+				{
+					"name": "map1",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/maps/map1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"maps",
+								"map1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1334"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"map1\",\n    \"name\": \"Map 1\",\n    \"roads\": [\n        {\n            \"x0\": 0,\n            \"y0\": 0,\n            \"x1\": 40\n        },\n        {\n            \"x0\": 40,\n            \"y0\": 0,\n            \"y1\": 30\n        },\n        {\n            \"x0\": 40,\n            \"y0\": 30,\n            \"x1\": 0\n        },\n        {\n            \"x0\": 0,\n            \"y0\": 0,\n            \"y1\": 30\n        }\n    ],\n    \"buildings\": [\n        {\n            \"x\": 5,\n            \"y\": 5,\n            \"w\": 30,\n            \"h\": 20\n        }\n    ],\n    \"offices\": [\n        {\n            \"id\": \"o0\",\n            \"x\": 40,\n            \"y\": 30,\n            \"offsetX\": 5,\n            \"offsetY\": 0\n        }\n    ],\n    \"lootTypes\": [\n        {\n            \"name\": \"key\",\n            \"file\": \"assets/key.obj\",\n            \"type\": \"obj\",\n            \"rotation\": 90,\n            \"color\": \"#338844\",\n            \"scale\": 0.03,\n            \"value\": 10\n        },\n        {\n            \"name\": \"wallet\",\n            \"file\": \"assets/wallet.obj\",\n            \"type\": \"obj\",\n            \"rotation\": 0,\n            \"color\": \"#883344\",\n            \"scale\": 0.01,\n            \"value\": 30\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Join to game",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1/api/v1/game/join",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"api",
+						"v1",
+						"game",
+						"join"
+					]
+				},
+				"description": "Join the game and receive an ID with and auth token"
+			},
+			"response": [
+				{
+					"name": "join",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"Scooby Doo\",\r\n    \"mapId\": \"map1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/game/join",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"game",
+								"join"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "61"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"authToken\": \"11148d10a4d300f2812c19b4acbc81fc\",\n    \"playerId\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "Move player",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "bb3377890a26f047d022614320a0614b",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:80/api/v1/game/player/action",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "80",
+					"path": [
+						"api",
+						"v1",
+						"game",
+						"player",
+						"action"
+					]
+				},
+				"description": "Set the character's direction of movement.  \n\nAllowed values:\n* R\n* L\n* U\n* D"
+			},
+			"response": [
+				{
+					"name": "Move player",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"move\": \"R\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:80/api/v1/game/player/action",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "80",
+							"path": [
+								"api",
+								"v1",
+								"game",
+								"player",
+								"action"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		},
+		{
+			"name": "Get game state",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "bb3377890a26f047d022614320a0614b",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:80/api/v1/game/state",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "80",
+					"path": [
+						"api",
+						"v1",
+						"game",
+						"state"
+					]
+				},
+				"description": "Returns information about the current game.  \nplayers - array with players.\n\n- pos - player's x, y position\n    \n- speed - acceleration of the player by x, y\n    \n- dir - player's direction\n    \n- bag - array with found items\n    \n- lostObjects - array of items on the map\n    \n- type - type of object\n    \n- pos - item position by x, y"
+			},
+			"response": [
+				{
+					"name": "state",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:80/api/v1/game/state",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "80",
+							"path": [
+								"api",
+								"v1",
+								"game",
+								"state"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "481"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"players\": {\n        \"2\": {\n            \"pos\": [\n                40.4,\n                0\n            ],\n            \"speed\": [\n                0,\n                0\n            ],\n            \"dir\": \"R\",\n            \"bag\": [],\n            \"score\": 0\n        }\n    },\n    \"lostObjects\": {\n        \"0\": {\n            \"type\": 0,\n            \"pos\": [\n                2.28074,\n                30\n            ]\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Tick",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:80/api/v1/game/tick",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "80",
+					"path": [
+						"api",
+						"v1",
+						"game",
+						"tick"
+					]
+				},
+				"description": "Used in test scenarios"
+			},
+			"response": []
+		}
+	]
+}
