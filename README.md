@@ -24,25 +24,14 @@ The goal of the game is to collect as many things as possible and take them back
 
 ### Prerequisites
 
-1. To build and run the server, you need to install [Docker](https://docs.docker.com/engine/install/ubuntu).
-2. Deploy postgresql container:
+1. To build and run the server, you just need to install [Docker](https://docs.docker.com/engine/install/ubuntu).
+
+
+### Build&Run
+
+1. Go to the `build` folder and execute:
    ```sh
-   docker run -d --name postgres-container -p 30432:5432 -e TZ=UTC -e POSTGRES_PASSWORD=Mys3Cr3t ubuntu/postgres:14-22.04_beta
-   ```
-3. Set postgres URL to env `GAME_DB_URL`. For example `postgres://postgres:Mys3Cr3t@localhost:30432/`
-
-
-### Build
-Go to the root of repository and run the command:
-```sh
-docker build -t my_http_server .
-```
-
-### Run
-
-1. Start the container by making the server available on port 80:
-   ```sh
-   docker run --rm -p 80:8080 my_http_server
+   docker compose up -d
    ```
 2. Open local address in browser:
    ```
@@ -50,8 +39,7 @@ docker build -t my_http_server .
    ```
 <p align="center">
   <img src="https://github.com/z-beslaneev/Detective-Pugs/blob/main/assets/gameplay.gif"/>
-</p>
-
+</p> 
 
 ### API Documentation
 
